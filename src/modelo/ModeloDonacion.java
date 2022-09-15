@@ -36,7 +36,7 @@ public class ModeloDonacion extends Donacion{
                 + ",'" + getDetallePro()+ "'"
                 + ",'" + getFechaEntrega()+ "'"
                 + ",'" + getMotivodonacion()+ "'"
-                + ",'" + getIddonacion()+"')";
+                + ",'" + getIdpersona()+"')";
         return mpgc.accion(sql);  //EJECUTAiddonaonaMOS EL INSERT
     }
     
@@ -49,7 +49,7 @@ public class ModeloDonacion extends Donacion{
     public boolean modificar(String id) {
         String sql;
         sql = "UPDATE donacion SET detalleproductodona='" + getDetallePro()+ "',fechaentregadona='" + getFechaEntrega()
-                + "',motivodona='" + getMotivodonacion()+ "',iddona='" + getIddonacion()
+                + "',motivodona='" + getMotivodonacion()+ "',idpersona='" + getIdpersona()
                 + " WHERE iddona = '" + id + "';";
         return mpgc.accion(sql);
     }
@@ -63,7 +63,7 @@ public class ModeloDonacion extends Donacion{
         sql += " UPPER(detalleproductodona) like UPPER('%" + cadena + "%') OR";
         sql += " UPPER(fechaentregadona) like UPPER('%" + cadena + "%') OR";
         sql += " UPPER(motivodona) like UPPER('%" + cadena + "%') OR";
-        sql += " UPPER(iddonaona) like UPPER('%" + cadena + "%')";
+        sql += " UPPER(idpersona) like UPPER('%" + cadena + "%')";
 
         //System.out.println(sql);
         ResultSet rs = mpgc.consulta(sql);

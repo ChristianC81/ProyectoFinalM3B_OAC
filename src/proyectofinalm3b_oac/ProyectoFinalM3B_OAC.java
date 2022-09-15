@@ -16,6 +16,7 @@ public class ProyectoFinalM3B_OAC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    }
+        System.out.println("YONNI MARICA");
+    } 
     
 }
