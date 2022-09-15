@@ -21,8 +21,8 @@ import vista.ViewAdministrador;
  */
 public class ControllerProducto {
 
-    private ModeloProducto model;
-    private ViewAdministrador vist;
+    ModeloProducto model;
+    ViewAdministrador vist;
     int filas;
 
     public ControllerProducto(ModeloProducto model, ViewAdministrador vist) {
@@ -36,7 +36,7 @@ public class ControllerProducto {
     public void iniciaControl() {
         cargaDatos();
         vist.getBtnbuscarProd().addActionListener(l -> cargaDatos());
-        //vist.getb.addActionListener(ll -> salir());
+        vist.getBtnEDITARPROD().addActionListener(al-> editarProducto());
         vist.getBtnCREARPROD().addActionListener(lc -> crearProducto());
         vist.getBtnELIMINARPROD().addActionListener(le -> eliminarProducto());
     }
@@ -55,10 +55,30 @@ public class ControllerProducto {
         producto.setIdproyprod(idproyprod);
 
         if (producto.setProducto()) {
-            JOptionPane.showMessageDialog(vist, "PERSONA CREADA :)");
+           Resouces.success("ATENCIÒN!!!", "Producto creado");
             cargaDatos();
         } else {
-            JOptionPane.showMessageDialog(vist, "NO SE PUDO CREAR LA PERSONA");
+            Resouces.error("ERROR!!!", "No se pudo crear el producto");
+        }
+    }
+    private void editarProducto() {
+
+        int cantidad = (int) vist.getjSpinnerCantidad().getValue();
+        String tipoprod = vist.getTxtTipoProducto().getText();
+        int iddonaprod = vist.getCbxIdDonacion().getSelectedIndex();
+        int idproyprod = vist.getCbxProyecto().getSelectedIndex();
+
+        ModeloProducto producto = new ModeloProducto();
+        producto.setCantprod(cantidad);
+        producto.setTipoprod(tipoprod);
+        producto.setIddonaprod(iddonaprod);
+        producto.setIdproyprod(idproyprod);
+
+        if (producto.updateProducto(producto.getIdprod())) {
+            Resouces.success("ATENCIÒN!!!", "Producto editado");
+            cargaDatos();
+        } else {
+            Resouces.error("ERROR!!!", "No se pudo editarr el producto");
         }
     }
 
