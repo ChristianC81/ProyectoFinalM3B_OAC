@@ -5,10 +5,6 @@
  */
 package proyectofinalm3b_oac;
 
-import controlador.ControllerPersona;
-import modelo.ModeloPersona;
-import vista.ViewAdministrador;
-
 /**
  *
  * @author miri
@@ -21,9 +17,6 @@ public class ProyectoFinalM3B_OAC {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("YONNI MARICA");
-        ViewAdministrador vista= new ViewAdministrador();
-        ModeloPersona modelo= new ModeloPersona();
-        ControllerPersona controladorPersona= new ControllerPersona(modelo, vista);
     } 
     
 }

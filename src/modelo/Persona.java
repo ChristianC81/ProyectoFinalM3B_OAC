@@ -7,113 +7,38 @@ package modelo;
 
 import java.awt.Image;
 import java.io.FileInputStream;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
  * @author Laptop
  */
 public class Persona {
-
-    private int idper;
-    private String cedulaper;
-    private String tipoper;
-    private String nombresper;
-    private String apellidosper;
-    private String direccionper;
-    private String telefonoper;
-    private String correoper;
-    private String generoper;
-    private Date fechaNacimiento;
-    private String estadoCivil;
-    private double salariobenefac;
-    private String estratoSbenefi;
-    private String titulo;
-    private String seguro;
-    private String horario;
-    private String periodovol;
-    private String tipovol;
-
-    private Image fotop;
-
+  private int idper;
+  private String cedulaper ;
+  private String nombresper;
+  private String apellidosper;
+  private String direccionper;
+  private String telefonoper;
+  private String correoper;
+  private String generoper;
+  private Date fechaNacimiento;
+  private String estadoCivil;
+  private double salariobenefac;
+  private String estratoSbenefi;
+  private String titulo;
+  private String seguro ;
+  private String horario;
+  private String periodovol;
+  private String tipovol;
+  private Image fotop;
+  
+    
     //GUARDAR FOTO
     private FileInputStream imageFile;
     private int length;
-
-    public Persona() {
-    }
-
-    public Persona(String nombresper, String apellidosper) {
-        this.cedulaper = cedulaper;
-        this.nombresper = nombresper;
-        this.apellidosper = apellidosper;
-    }
-
-    public Persona(int idper, String cedulaper, String tipoper, String nombresper, String apellidosper, String direccionper, String telefonoper, String correoper, String generoper, Date fechaNacimiento, String estadoCivil, double salariobenefac, String estratoSbenefi, String titulo, String seguro, String horario, String periodovol, String tipovol, Image fotop, FileInputStream imageFile, int length) {
-        this.idper = idper;
-        this.cedulaper = cedulaper;
-        this.tipoper = tipoper;
-        this.nombresper = nombresper;
-        this.apellidosper = apellidosper;
-        this.direccionper = direccionper;
-        this.telefonoper = telefonoper;
-        this.correoper = correoper;
-        this.generoper = generoper;
-        this.fechaNacimiento = fechaNacimiento;
-        this.estadoCivil = estadoCivil;
-        this.salariobenefac = salariobenefac;
-        this.estratoSbenefi = estratoSbenefi;
-        this.titulo = titulo;
-        this.seguro = seguro;
-        this.horario = horario;
-        this.periodovol = periodovol;
-        this.tipovol = tipovol;
-        this.fotop = fotop;
-        this.imageFile = imageFile;
-        this.length = length;
-    }
-
-    /**
-     * @return the fotop
-     */
-    public Image getFotop() {
-        return fotop;
-    }
-
-    /**
-     * @param fotop the fotop to set
-     */
-    public void setFotop(Image fotop) {
-        this.fotop = fotop;
-    }
-
-    /**
-     * @return the imageFile
-     */
-    public FileInputStream getImageFile() {
-        return imageFile;
-    }
-
-    /**
-     * @param imageFile the imageFile to set
-     */
-    public void setImageFile(FileInputStream imageFile) {
-        this.imageFile = imageFile;
-    }
-
-    /**
-     * @return the length
-     */
-    public int getLength() {
-        return length;
-    }
-
-    /**
-     * @param length the length to set
-     */
-    public void setLength(int length) {
-        this.length = length;
-    }
+    
+    
 
     /**
      * @return the idper
@@ -141,20 +66,6 @@ public class Persona {
      */
     public void setCedulaper(String cedulaper) {
         this.cedulaper = cedulaper;
-    }
-
-    /**
-     * @return the tipoper
-     */
-    public String getTipoper() {
-        return tipoper;
-    }
-
-    /**
-     * @param tipoper the tipoper to set
-     */
-    public void setTipoper(String tipoper) {
-        this.tipoper = tipoper;
     }
 
     /**
@@ -367,4 +278,17 @@ public class Persona {
         this.tipovol = tipovol;
     }
 
+    /**
+     * @return the fotop
+     */
+    public Image getFotop() {
+        return fotop;
+    }
+
+    /**
+     * @param fotop the fotop to set
+     */
+    public void setFotop(Image fotop) {
+        this.fotop = fotop;
+    }
 }
