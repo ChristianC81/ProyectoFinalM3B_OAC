@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -20,6 +22,8 @@ import java.util.logging.Logger;
  */
 public class ModeloDonacion extends Donacion{
     ModelPGConection mpgc = new ModelPGConection();
+    Connection con;
+
 
     public ModeloDonacion() {
     }
@@ -106,7 +110,7 @@ public class ModeloDonacion extends Donacion{
             Logger.getLogger(ModelPGConection.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            rs.close();//cierro conexion BD
+            rs.close();//cierro mpgcion BD
         } catch (SQLException ex) {
             Logger.getLogger(ModeloDonacion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -164,5 +168,21 @@ public class ModeloDonacion extends Donacion{
         return listdona;
     }
     
+    public void llenar_combo(JComboBox< Persona> jComboBoxPersonasBenefactDon) {
+        try {
+            String sql = "SELECT nombresper,apellidosper FROM persona where tipoper = 'Benefactor'";
+            mpgc.sentencia = mpgc.conectar().createStatement();
+            mpgc.rs = mpgc.consulta(sql);
+            jComboBoxPersonasBenefactDon.removeAllItems();
+            while (mpgc.rs.next()) {
+                jComboBoxPersonasBenefactDon.addItem(new Persona(
+                mpgc.rs.getString("nombresper"),
+                mpgc.rs.getString("apellidosper")
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }
 }
 

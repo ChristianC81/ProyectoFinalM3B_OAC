@@ -201,7 +201,9 @@ public class ControllerProyecto {
                 vista.getjDateChooserProyeFechaInicio().setDate(lista.get(i).getFechainicioproy());
                 vista.getjDateChooserProyeFechaFin().setDate(lista.get(i).getFechafinproy());
                 vista.getTxtLugarProye().setText(lista.get(i).getLugarproy());
-                vista.getjComboBoxPersonasBenefactDon().setSelectedItem(lista.get(i).getIdpersona());
+                
+                //AQUIIIIII 
+                //vista.getjComboBoxPersonasBenefactDon().setSelectedItem(lista.get(i).getIdpersona());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

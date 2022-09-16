@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Holder;
 import modelo.Donacion;
 import modelo.ModeloDonacion;
-import controlador.Resouces;
+import modelo.ModelPGConection;
 import vista.ViewAdministrador;
 
 /**
@@ -25,6 +25,8 @@ import vista.ViewAdministrador;
  * @author Laptop
  */
 public class ControllerDonacion {
+
+    private ModelPGConection conex;
     private ModeloDonacion modelo;
     private ViewAdministrador vista;
     int filas;
@@ -34,6 +36,7 @@ public class ControllerDonacion {
         this.vista = vista;
         vista.setVisible(true);
     }
+
     public void iniciaControl() {
         cargaDatos();
         vista.getBtnbuscarDONA().addActionListener(l -> cargaDatos());
@@ -79,31 +82,30 @@ public class ControllerDonacion {
     };
 
     private void crearDonacion() {
-            //INSERT
-            String detalle = vista.getTxaDetalleProdDON().getText();;
-            String motivo = vista.getTxaMotivoDON().getText();
-            String idpersona = vista.getCbxBeneficiario().getSelectedItem().toString();
+        //INSERT
+        String detalle = vista.getTxaDetalleProdDON().getText();;
+        String motivo = vista.getTxaMotivoDON().getText();
+        String idpersona = (String) vista.getjComboBoxPersonasBenefactDon();
 
-            Instant instant = vista.getjDateChooserFECHADONA().getDate().toInstant();
-            ZoneId zid = ZoneId.of("America/Guayaquil");
-            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zid);
-            Date fecha = Date.valueOf(zdt.toLocalDate());
+        Instant instant = vista.getjDateChooserFECHADONA().getDate().toInstant();
+        ZoneId zid = ZoneId.of("America/Guayaquil");
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zid);
+        Date fecha = Date.valueOf(zdt.toLocalDate());
 
-            ModeloDonacion donacion = new ModeloDonacion();
-            donacion.setDetallePro(detalle);
-            donacion.setMotivodonacion(motivo);
-            donacion.setFechaEntrega(fecha);
-            int persona = Integer.parseInt(idpersona);
-            donacion.setIdpersona(persona);
+        ModeloDonacion donacion = new ModeloDonacion();
+        donacion.setDetallePro(detalle);
+        donacion.setMotivodonacion(motivo);
+        donacion.setFechaEntrega(fecha);
+        int persona = Integer.parseInt(idpersona);
+        donacion.setIdpersona(persona);
 
-            if (donacion.setDonacion()) {
-                Resouces.success("Atención! ","DONACIÓN CREADA");
-                cargaDatos();
-            } else {
-                Resouces.error("Atención! ","NO SE PUDO CREAR LA DONACIÓN");
-            }
+        if (donacion.setDonacion()) {
+            Resouces.success("Atención! ", "DONACIÓN CREADA");
+            cargaDatos();
+        } else {
+            Resouces.error("Atención! ", "NO SE PUDO CREAR LA DONACIÓN");
         }
-
+    }
 
     private void eliminarDonacion() {
         ModeloDonacion donacion1 = new ModeloDonacion();
@@ -127,31 +129,31 @@ public class ControllerDonacion {
 
 //    @SuppressWarnings("empty-statement")
     private void editarDatosDonacion() {
-            String detalle = vista.getTxaDetalleProdDON().getText();
-            String motivo = vista.getTxaMotivoDON().getText();
-            String idpe = (String) vista.getjComboBoxPersonasBenefactDon().getSelectedItem();
-            int pers = Integer.parseInt(idpe);
-            
-            Instant instant = vista.getjDateChooserFECHADONA().getDate().toInstant();
-            ZoneId zid = ZoneId.of("America/Guayaquil");
-            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zid);
-            Date fecha = Date.valueOf(zdt.toLocalDate());
+        String detalle = vista.getTxaDetalleProdDON().getText();
+        String motivo = vista.getTxaMotivoDON().getText();
+        String idpe = (String) vista.getjComboBoxPersonasBenefactDon();
+        int pers = Integer.parseInt(idpe);
 
-            ModeloDonacion donacion = new ModeloDonacion();
-            donacion.setDetallePro(detalle);
-            donacion.setMotivodonacion(motivo);
-            donacion.setFechaEntrega(fecha);
-            donacion.setIdpersona(pers);
-            
-            int select = JOptionPane.showConfirmDialog(vista, "¿ESTÁS SEGUR@ DE EDITAR LOS DATOS DE ESTA DONACION?");
-            if (select == JOptionPane.YES_OPTION) {
-                if (donacion.editarDonacion()) {
-                    Resouces.success("Atención!!", "DONACION EDITADA :)");
-                    cargaDatos();
-                } else {
-                    JOptionPane.showMessageDialog(vista, "NO SE PUDO EDITAR LA DONACIÓN");
-                }
+        Instant instant = vista.getjDateChooserFECHADONA().getDate().toInstant();
+        ZoneId zid = ZoneId.of("America/Guayaquil");
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zid);
+        Date fecha = Date.valueOf(zdt.toLocalDate());
+
+        ModeloDonacion donacion = new ModeloDonacion();
+        donacion.setDetallePro(detalle);
+        donacion.setMotivodonacion(motivo);
+        donacion.setFechaEntrega(fecha);
+        donacion.setIdpersona(pers);
+
+        int select = JOptionPane.showConfirmDialog(vista, "¿ESTÁS SEGUR@ DE EDITAR LOS DATOS DE ESTA DONACION?");
+        if (select == JOptionPane.YES_OPTION) {
+            if (donacion.editarDonacion()) {
+                Resouces.success("Atención!!", "DONACION EDITADA :)");
+                cargaDatos();
+            } else {
+                JOptionPane.showMessageDialog(vista, "NO SE PUDO EDITAR LA DONACIÓN");
             }
+        }
     }
 
     private void cargaDatos() {
@@ -169,11 +171,11 @@ public class ControllerDonacion {
             vista.getjTableDatosDonacione().setValueAt(per.getFechaEntrega(), i.value, 2);
             vista.getjTableDatosDonacione().setValueAt(per.getMotivodonacion(), i.value, 3);
             vista.getjTableDatosDonacione().setValueAt(per.getIdpersona(), i.value, 4);
-            
+
             i.value++;
         });
     }
-    
+
     public void cargarDatosModificar() {
         try {
             int filaSelecionada = vista.getjTableDatosPersonas().getSelectedRow();
@@ -192,9 +194,11 @@ public class ControllerDonacion {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void salir() {
         System.exit(0);
     }
+
     
-}
+    
+ }
